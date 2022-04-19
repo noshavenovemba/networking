@@ -1,7 +1,7 @@
 from netmiko import ConnectHandler
 from netmiko.ssh_exception import  NetMikoTimeoutException
 
-ipaddr = "51.250.31.71"
+ipaddr = "127.0.0.1"
 
 iosv_l3 = {
     'device_type': 'cisco_ios',
