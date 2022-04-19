@@ -4,7 +4,7 @@ import json
 def test_of_napalm():
 	driver = get_network_driver('ios')
 	optional_args = {'secret': 'test'}
-	connection = driver('51.250.31.71', 'test', 'test', optional_args=optional_args)
+	connection = driver('127.0.0.1', 'test', 'test', optional_args=optional_args)
 
 	connection.open()
 	connection_output_int = connection.get_interfaces()
