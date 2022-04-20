@@ -1,0 +1,5 @@
+Switch,Interface,Link,VLAN
+csw-01,Ethernet1,esx01,trunk
+csw-01,Ethernet2,esx02,999
+csw-01,Ethernet3,esx01,trunk
+csw-01,Ethernet4,esx03,trunk
