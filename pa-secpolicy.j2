@@ -1,0 +1,15 @@
+!Generated from csv
+"{{ rule_name }}; index: {{ index_number }}" {
+	from [{{ source_zone }}];
+	source [{{ source_ip }}];
+	source-region non;
+	to [{{ destination_zone }}];
+	destination [{{ destination_ip }}];
+	destination-region none;
+	user any;
+	category any;
+	application/service 0:any/{{ transport_protocol }}/any/{{ port }};
+	action {{ action }};
+	icmp-unreachable: no
+	terminal yes;
+}

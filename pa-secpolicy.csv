@@ -1,0 +1,2 @@
+rule_name,index_number,source_zone,source_ip,destination_zone,destination_ip,transport_protocol,port,action
+"Google DNS",100,UAZ,172.16.0.0/16,IZ,8.8.8.8,any,any,allow
