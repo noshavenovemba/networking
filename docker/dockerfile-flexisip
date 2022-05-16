@@ -1,0 +1,23 @@
+FROM centos:7
+
+COPY docker/Belledonne.repo /etc/yum.repos.d/Belledonne.repo
+
+RUN yum -y install epel-release gdb
+
+RUN yum update -y
+
+RUN yum install -y --downloadonly --downloaddir=/opt bc-flexisip bc-flexisip-debuginfo bc-flexisip-jwe-auth-plugin
+
+RUN mv /opt/bc-flexisip*.rpm /tmp
+
+RUN rpm -i /opt/*.rpm
+
+RUN rpm -i --noscripts /tmp/bc-flexisip*.rpm
+
+RUN rm /opt/*.rpm
+
+ENV PATH=$PATH:/opt/belledonne-communications/bin
+
+WORKDIR /opt/belledonne-communications
+
+RUN flexisip --dump-default all > /etc/flexisip/flexisip.conf
