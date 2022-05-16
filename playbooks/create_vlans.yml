@@ -1,0 +1,16 @@
+- name: Create vlans
+  hosts: sw-este
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+
+  - name: create VLAN
+    ios_vlan:
+      vlan_id: "{{ item.id }}"
+      name: "{{ item.name }}"
+      state: present
+
+    with_items:
+      - { id : 21, name : Contabilidad }
+      - { id : 23, name : Ingenieria }
