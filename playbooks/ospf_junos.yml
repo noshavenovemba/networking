@@ -1,0 +1,37 @@
+---
+- name: Configure OSPF
+  hosts: vsrx
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+
+  vars_prompt:
+    - name: "DEVCE_USERNAME"
+      prompt: "Device username"
+      private: yes
+    -name: "DEVICE_PASSWORD"
+      prompt: "Device password"
+      private: yes
+
+  vars:
+    provider_info:
+      hosts: "{{ inventory_hotname }}"
+      user: "{{ DEVICE_USERNAME }}"
+      passwd: "{{ DEVICE_PASSWORD}} "
+      port: "22"
+  tasks:
+    - name: Load baseline OSPF Configure
+      juniper_junos_config:
+        provider: "{{ provider_info}} "
+        config_mode: exclusive
+        load: replace
+        src: ospf_example.conf
+        format: text
+        commit: true
+        comment: "Baseline OSPF configured pushed from Ansible"
+      register: junos
+
+    - name: Print config
+      debug:
+        var: junos.diff_lines
