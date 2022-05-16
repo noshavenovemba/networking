@@ -1,0 +1,9 @@
+FROM  --platform=arm64
+
+WORKDIR /Users/vmorozov/Desktop
+
+MKDIR /testdir
+
+RUN ifconfig
+
+CMD ["echo", "hello"]
