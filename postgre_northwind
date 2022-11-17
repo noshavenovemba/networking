@@ -27,3 +27,13 @@ WHERE quantity > ALL (SELECT AVG(quantity)
 					  FROM order_details
 					  GROUP by product_id)
 ORDER BY quantity
+
+SELECT customer_id SUM(freight) AS freight_sum
+FROM orders
+INNER JOIN (SELECT customer_id, AVG(freight) AS freight_avg
+	    FROM orders
+	    GROUP BY customer_id)
+USING(customer_id)
+WHERE freight > freight_avg AND shipped_date BETWEEN 'XXX' AND 'YYY'
+GROUP BY customer_id
+ORDER BY freight_sum;
