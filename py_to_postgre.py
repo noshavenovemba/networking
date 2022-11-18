@@ -6,7 +6,7 @@ print("gamarjoba")
 hostname = 'localhost'
 database = 'mynewdb'
 username = 'postgres'
-pwd = 'w0nd3rwaLL'
+pwd = 'trarara'
 port_id = 5432
 con = None
 cur = None
