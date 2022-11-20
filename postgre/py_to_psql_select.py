@@ -21,6 +21,10 @@ try:
 	)
 
 	cur = con.cursor()
+	print('PostgreSQL database version:')
+	cur.execute('SELECT version()')
+	db_version = cur.fetchone()
+	print(db_version)
 
 
 	postgreSQL_select_Query = "SELECT * FROM public.stuff"
