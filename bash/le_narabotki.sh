@@ -1,7 +1,22 @@
 #!/bin/sh # usage: count_types [directory ...] 
-# Counts how many files there are of each type 
-# Original by Bruce Barnett 
-# Updated version by yu@math.duke.edu (Yunliang Yu) 
+
+#
+
+#!/bin/bash
+
+for i in $@
+do
+ping -c 1 $i &> /dev/null
+
+if [ $? -ne 0 ]; then
+	echo "`date`: ping failed, $i host is down!" | mail -s "$i host is down!" vmorozov.info@gmail.com
+
+fi 
+done
+
+
+
+
 find ${*-.} -type f -print | xargs file | 
 awk '{ 
 	$1=NULL; 
