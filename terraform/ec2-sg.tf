@@ -57,4 +57,12 @@ resource "aws_security_group" "awsdemosg" {
 resource "aws_instance" "demo" {
   ami = lookup(var.awsdemo, "ami")
   instance_type = "t2.micro"
+  vpc_security_group_ids = [
+    aws_security_group.awsdemosg.id
+  ]
+  depends_on = [ aws_security_group.awsdemosg ]
+}
+
+output "ec2instance" {
+  value = aws_instance.demo.public_ip
 }
