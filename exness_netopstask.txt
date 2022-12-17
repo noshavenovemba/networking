@@ -1,0 +1,6 @@
+In case of a multi-vendor setup the best option from a convergence perspective will be using OSPF (it’s faster then EGP, slower then EIGRP, but EIGRP is a Cisco proprietary protocol so it may not work on a different vendor) for building routing table between sites, we also need to adjust timers and put BFD, cause it will help to minimise reaction time in case of any failures. If it’s definitely MPLS circuit we can enable it then on uplinks for labels assignment. 
+Talking about load sharing we can use ECMP and enabling QoS to keep up with different bandwidth of the circuits.
+
+If we have for example Cisco devices on both sides using EIGRP should be the fastest option for a convergence as well with ECMP, BFD and QoS technologies and enabling MPLS on uplinks.
+
+We can also use Traffic Engineering extension for building MPLS tunnels for a load sharing, but I’m not sure how will it work instance with PIM if it’s needed in such infrastructure, and if it's supported by on-site router, so personally I would choose first two options or at least testing MPLS TE in the lab to make sure it meet our expectations and used technologies. But it may be also the fastest way from convergence point of view.
