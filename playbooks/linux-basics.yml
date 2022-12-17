@@ -1,0 +1,55 @@
+  - name: Check the remote host uptime
+    hosts: testservers
+    tasks:
+      - name: Execute the Uptime command over Command module
+        register: uptimeoutput
+        command: "uptime"
+      - debug:
+          var: uptimeoutput.stdout_lines
+         
+      - name: Execute the UNAME command
+        register: unameout
+        command: "uname -a"
+      - debug:
+          var: unameout.stdout_lines
+                  
+      - name: Execute the df command
+        register: dfout
+        command: "df -h"
+      - debug:
+          var: dfout.stdout_lines
+          
+      - name: ensure apache is at the latest version
+        yum:
+          name: httpd
+          state: latest
+      - name: ensure apache is running
+        service:
+          name: httpd
+          state: started  
+          
+      - name: restartapache
+        register: httpdresout
+        become: yes
+        command: "httpd -k restart"
+        when: ansible_hostname == "mwiweb02"
+      - debug:
+          var: httpdresout.stdout_lines
+          
+    - name: "Create a file if it does not exist"
+      command: "touch /tmp/latestfile"
+      args:
+         creates: "/tmp/latestfile"
+      register: createif
+
+    - name: "Display the file to make sure its created"
+      command: "ls -lrt /tmp/latestfile"
+      register: displayif
+      when: createif is changed
+    - debug: var=displayif.stdout
+
+    - name: "Remove the file if it exist"
+      command: "rm -rf /tmp/latestfile"
+      args:
+         removes: "/tmp/latestfile"
+      register: removeif      
