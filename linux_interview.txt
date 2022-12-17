@@ -1,0 +1,40 @@
+syscall // call to OS through fork, exec
+inode // data structure to describe a file
+vnode // may be on another pc
+/dev/null // eats any text, returns EoF
+/etc/ncheck // generate name from inode
+
+
+
+--- commands ---
+chown // change owner
+bg _or_ fg // bring background or foreground
+jobs // list of jobs (process by the shell)
+lpr // print to printer
+comm // compare files
+nom *.ms // not end with ms
+tee // reads input and writes to the file
+tpipe // like tee, but passes to pipe
+pushd _or_ popd // jump between files
+lookfor // all files in dir
+ren xx yy // rename file
+entomb //
+rm -i // delete
+
+& // job on a background
+$x:h // head of pathname
+:r // root
+:t // tail
+:p // print command
+`substitution` // substitution, replace a command
+< // sort file
+!$ // take the last thing for lat string
+!:n* // take arguments n through the last string
+$ // end of file
+^^ // previous command
+! // last command
+&& // run when previous command success
+?af? // contains 'af'
+!! // repeats last command
+> // stderr
+>> // stdout to the EoF
