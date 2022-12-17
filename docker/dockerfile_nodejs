@@ -6,7 +6,7 @@ COPY package.json .
 
 RUN npm install #(install all dependencies)
 
-COPY . . #(path outside - . The same folder that contains docker file, copy to)
+COPY . . #(copy from dockerfile location to WORKDIR /app)
 
 EXPOSE 3000
 
