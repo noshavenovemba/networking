@@ -1,9 +1,14 @@
 FROM  --platform=arm64
 
-WORKDIR /Users/vmorozov/Desktop
+WORKDIR /opt/homebrew/etc/nginx
+#/opt/homebrew/var/www/index.html
 
 MKDIR /testdir
 
-RUN ifconfig
+RUN pip3 install psycopg2-binary
+
+RUN which pg_config #(/opt/homebrew/bin/pg_config)
+
+RUN which openssl #(/usr/bin/openssl)
 
 CMD ["echo", "hello"]
