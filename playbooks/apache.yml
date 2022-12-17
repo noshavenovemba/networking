@@ -1,0 +1,6 @@
+---
+- hosts: servers
+  sudo: yes
+  tasks:
+    - name: intall apache2
+      apt: name=apache2 update_cache=yes state=latest
