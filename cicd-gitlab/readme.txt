@@ -1,9 +1,19 @@
-#runner registration
+sudo gitlab-runner register -n \
+  --url https://gitlab.com/ \
+  --registration-token REGISTRATION_TOKEN \
+  --executor shell \
+  --description "My Runner"
 
-sudo gitlab-runner register \
-  --url "https://gitlab.example.com/" \
-  --registration-token "PROJECT_REGISTRATION_TOKEN" \
-  --description "docker-ruby:2.6" \
-  --executor "docker" \
-  --template-config /tmp/test-config.template.toml \
-  --docker-image ruby:2.6
+sudo usermod -aG docker gitlab-runner
+
+sudo -u gitlab-runner -H docker info
+
+nano .gitlab-ci.yml
+
+before_script:
+  - docker info
+
+build_image:
+  script:
+    - docker build -t my-docker-image .
+    - docker run my-docker-image /script/to/run/tests
