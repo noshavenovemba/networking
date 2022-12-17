@@ -30,6 +30,8 @@ stages:
       image:
           name: amazon/aws-cli:2.4.11
           entrypoint: ["""]
+      rules:
+          - if: ... == main
       script:
           - aws -- version
           - echo "Hello S3" > test.txt
