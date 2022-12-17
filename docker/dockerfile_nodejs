@@ -1,0 +1,13 @@
+FROM node:14
+
+WORKDIR /app
+
+COPY package.json .
+
+RUN npm install #(install all dependencies)
+
+COPY . . #(path outside - . The same folder that contains docker file, copy to)
+
+EXPOSE 3000
+
+CMD [“node”, “app.js”]
