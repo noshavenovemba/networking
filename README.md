@@ -1,1 +1,1 @@
-scripts, manifests, plyabooks
+playbooks, manifests, pipelines
