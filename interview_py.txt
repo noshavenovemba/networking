@@ -1,0 +1,30 @@
+--- data sctruct ---
+mutable: list, dict, set
+immutable: int, str, tuple
+Insert -> Slicing -> Iterating -> enumerate(x)
+len(x)
+x.reverse()
+x.sort()
+x.pop()
+
+--- comprehension lists ---
+x = [m**2 for m in range(10) if m>4]
+
+class human:
+  name = None
+  def get_main(self):
+    print("Enter you name: ")
+    self.name=input()
+  
+if __name__ == “main”: execute code only if the file was run directly, and not imported
+.self - represent the instance of class, access attributes and methods of clas
+___init___ method - called when object is created, initialise object's attributes
+
+f=open("/usr/bin/file.txt","r")
+
+from random import shuffle
+shuffle(["a", "b", "c"])
+
+--- lambda anonymous function, take any number of args ---
+x=lambda a: a+10
+x(8)
