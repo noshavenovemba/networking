@@ -1,0 +1,5 @@
+Prometheus metrics:
+1) Counters - value that increases
+2) Gauges - value up/down (memory usage)
+3) Histograms - frequency of value observation (http request)
+4) Summaries - same as histograms but calculcated on application, not server
