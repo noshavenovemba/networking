@@ -1,0 +1,16 @@
+---
+-
+  name: Create Backup Configs
+  hosts: all_routers
+  gather_facts: no
+
+  tasks:
+    - name: Generate Backup Configs
+      cisco.ios.ios_config:
+        backup: True
+      register: runn_config
+
+    - name: Local copy of Backup
+      copy:
+        src: "{{runn_config.backup_path}}"
+        dest: "./backup/{{inventory_hostname}}_running.cfg"
