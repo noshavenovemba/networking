@@ -1,4 +1,5 @@
 --- services ---
+/etc/init.d/apache restart 
 syscall // user call to OS through fork, exec
 signal // program send signal to another program (hangup. quit, kill, stop)
 zombie process // parent ack not ockured
