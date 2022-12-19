@@ -53,7 +53,8 @@ $ // end of file (\$$ = $$)
 lscpu // gathers cpu architecture
 uptime // shows load average - keep track of system resources, monitor
 free -m // show free and used physical memory
-top // show active processes. 
+top // show active processes
+cat /proc/PID/cmdline // find process executable or ls -la /proc/PID/exe (symbolic link)
 lsmod // show loaded modules
 vmstat // show swap
 du // disk usage
