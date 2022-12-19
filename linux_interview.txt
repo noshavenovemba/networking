@@ -81,7 +81,37 @@ ip route add //
 hosts.allow // file to specific IP
 iptables -L // list all // iptables -A // allow // iptables -P // deny //
 unbound // A(hostname to IP), CNAME (hostname - hostname), PTR (IP to hostname)
- 
+--- NAT CONFIGURATION ---
+sudo nano /etc/sysctl.conf // (net.ipv4.ip_forward = 1)
+sudo apt install iptables-persistent
+sudo iptables -t nat -A POSTROUTING -j MASQUERADE
+sudo sh -c “iptables-save > /etc/iptables/rules.v4”
+sysctl -p /etc/sysctl.conf
+service network restart
+--- BRIDGE CONFIGURATION ---
+apt-get install bridge-utils
+nano /etc/netplan/... 
+//network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp1s0:
+      dhcp4: no
+  bridges:
+    br0:
+      dhcp4: yes
+      interfaces:
+	     - enp1s0
+sudo netplan apply
+sudo brctl show
+--- BRIDGE NMCLI ---
+sudo nmcli conn add type bridge con-name br0 ifname br0
+sudo nmcli conn add type ethernet slave-type bridge con-name bridge-br0 ifname enp1s0 master br0
+sudo nmcli conn show --active
+sudo nmcli conn up br0
+sudo nmcli conn down Ethernet\ connection\ 1
+sudo nmcli conn show --active
+   
 --- reg exp ---
 & // job on a background
 $x:h // head of pathname
