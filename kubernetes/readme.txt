@@ -1,3 +1,5 @@
+minikube start --driver=virtualbox
+
 kubectl run nginx --image=nginx
 kubectl get pods
 kubectl get namespaces
