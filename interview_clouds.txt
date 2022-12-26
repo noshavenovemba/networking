@@ -1,0 +1,1 @@
+Azure extension script - launch applications while booting VM (or you may create custom VM image)
