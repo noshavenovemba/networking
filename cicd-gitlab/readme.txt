@@ -25,3 +25,5 @@ git log - find ID of commit
 git reset -  moving the current head of the branch back to the specified commit, thereby changing the commit history
 
 git revert - creating a new commit that undoes the changes in the specified commit and so does not change the history
+
+gitlab extend // template creation
