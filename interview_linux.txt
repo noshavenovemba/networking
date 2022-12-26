@@ -69,6 +69,7 @@ vgextend // dnamically extend lvm volumes
 gdisk /dev/sdc // create partition
 mkfs.ext3 -L // create file system in partition
 mount /dev/sdc/ /mnt/disk1 // mout partition to device
+iostat // monitoring system input/output statistics for devices and partitions
 
 --- networking ---
 firewall -cmd
