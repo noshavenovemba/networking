@@ -27,3 +27,5 @@ k expose deployment k8s-web-hello —type=LoadBalancer —port=3000
 minikube dashboard //open web interface
 
 k apply -f deployment.yml
+
+daemonSet // ensures that all (or some) Nodes run a copy of a Pod
