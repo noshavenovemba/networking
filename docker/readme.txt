@@ -13,3 +13,7 @@ docker ps -a
 docker stop 
 
 docker pull #(download from remote to local)
+
+docker -rmi // delete image
+
+docker prune // delete all images
