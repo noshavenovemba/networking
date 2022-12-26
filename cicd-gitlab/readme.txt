@@ -19,3 +19,9 @@ build_image:
     - docker run my-docker-image /script/to/run/tests
 
 submodules - allow you to keep a git repository as a subdirectory of another git repository
+
+git log - find ID of commit
+
+git reset -  moving the current head of the branch back to the specified commit, thereby changing the commit history
+
+git revert - creating a new commit that undoes the changes in the specified commit and so does not change the history
