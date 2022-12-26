@@ -17,3 +17,5 @@ build_image:
   script:
     - docker build -t my-docker-image .
     - docker run my-docker-image /script/to/run/tests
+
+submodules - allow you to keep a git repository as a subdirectory of another git repository
