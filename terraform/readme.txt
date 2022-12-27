@@ -8,4 +8,6 @@ terraform apply // create
 
 terraform destroy // delete
 
+terraform destroy -target aws.subnet.dev_subnet_1
+
 tfstate // is for saving state of rolled instance
