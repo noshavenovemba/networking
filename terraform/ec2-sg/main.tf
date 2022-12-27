@@ -2,6 +2,7 @@ terraform {
   required_providers {
     aws = {
       source = "hashicorp/aws"
+      version = "~> 3.0"
     }
   }
 }
@@ -16,15 +17,14 @@ variable "awsdemo" {
 }
 
 provider "aws" {
-  region = "us-east-1"
-  access_key = "!!!"
-  secret_key = "!!!"
-  #profile = "default"
+    access_key = "${var.access_key}"
+    secret_key = "${var.secret_key}"
+    region = "us-east-1"
 }
 
-resource "aws_security_group" "awsdemosg" {
-  name = lookup(var.awsdemo, "secgroupname")
-  description = lookup(var.awsdemo, "secgroupname")
+resource "aws_security_group" "secgroup" {
+  name = "${var.secgroupname}"
+  #description = lookup(var.awsdemo, "secgroupname")
   #vpc_id = lookup(var.awsprops, "vpc")
 
   // To Allow SSH Transport
@@ -55,12 +55,12 @@ resource "aws_security_group" "awsdemosg" {
 }
 
 resource "aws_instance" "demo" {
-  ami = lookup(var.awsdemo, "ami")
+  ami = "${var.ami_id}"
   instance_type = "t2.micro"
   vpc_security_group_ids = [
-    aws_security_group.awsdemosg.id
+    aws_security_group.secgroup.id
   ]
-  depends_on = [ aws_security_group.awsdemosg ]
+  depends_on = [ aws_security_group.secgroup]
 }
 
 output "ec2instance" {
