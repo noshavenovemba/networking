@@ -6,6 +6,14 @@ docker pull tomcat // download image from remote
 
 docker build mytestbuild .
 
+DOCKER_CONTENT_TRUST=1 // to verify the integrity and authenticity of an image
+
+hadolint Dockerfile // scan dockerfile for syntax
+
+HEALTHCHECK CMD curl --fail http://localhost:8000 || exit 1 
+
+docker run --cpus=2 -m 512m nginx
+
 docker run -it -p 80800:3000 d2cc7b04fb0a // interactive mode
 
 docker run -d mytestbuild // run as a daemon
