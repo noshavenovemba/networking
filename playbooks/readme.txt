@@ -7,3 +7,5 @@ ansible-playbook --syntax-check vsftpd.yml
 ansible-playbook --vvv vsftpd.yml //details
 
 ansible-vault // encrypt and decrypt files
+
+ansible -m setup all // gather all
