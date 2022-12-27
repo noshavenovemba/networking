@@ -10,6 +10,12 @@ docker run -it -p 80800:3000 d2cc7b04fb0a // interactive mode
 
 docker run -d mytestbuild // run as a daemon
 
+docker tag mytestbuild mytag
+
+docker exec -it d2cc7b04fb0a /bin/bash // echo "another string" >> /var/www/index.html
+
+docker commit d2cc7b04fb0a mytestbuild:v2
+
 sudo docker run -it --rm --network postgres-network ubuntu/postgres:14-22.04_beta psql -h postgres-container_s3Cr3t -U postgres
 
 docker run --name myapache -d -p 80:80 apache_image:1.0
@@ -18,7 +24,9 @@ docker ps -a
 
 docker stop 
 
-docker -rmi // delete image
+docker rm // delete container
+
+docker rmi // delete image
 
 docker prune // delete all images
 
