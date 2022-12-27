@@ -8,6 +8,8 @@ terraform apply // create
 
 terraform apply -auto-approve 
 
+terraform apply -var "subnet=10.0.0.0/24"
+
 terraform destroy // delete
 
 terraform destroy -target aws.subnet.dev_subnet_1
