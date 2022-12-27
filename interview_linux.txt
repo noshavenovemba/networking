@@ -1,3 +1,6 @@
+--- repositories ---
+install apt-transport-https
+
 --- services ---
 /etc/init.d/apache restart 
 /etc/init.d // install daemon
