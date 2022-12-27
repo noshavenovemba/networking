@@ -1,3 +1,5 @@
+terraform refresh // query provider to get current state
+
 terraform init // download plugin
 
 terraform plan // see changes
