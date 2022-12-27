@@ -33,3 +33,9 @@ variable "number_of_instances" {
         description = "security group name"
         default = "Demo-Sec-Group"
 }
+
+variable "vpc_cidr" {
+        description = "cidr block"
+        default = "10.0.0.0/16"
+
+}
