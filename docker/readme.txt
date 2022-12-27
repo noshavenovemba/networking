@@ -2,6 +2,8 @@ sudo usermod -aG docker %USERNAME%
 
 docker search tomcat
 
+docker scan tomcat // scan snyk for vulnerabilities
+
 docker pull tomcat // download image from remote
 
 docker build mytestbuild .
