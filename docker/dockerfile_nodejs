@@ -1,5 +1,8 @@
 FROM node:14
 
+ENV MONGO_DB_USERNAME=admin \
+    MONGO_DB_PWD=password // artifacts here or in docker-compose file
+
 WORKDIR /app
 
 COPY package.json .
@@ -10,4 +13,4 @@ COPY . . #(copy from dockerfile location to WORKDIR /app)
 
 EXPOSE 3000
 
-CMD [“node”, “app.js”]
+CMD [“node”, “app.js”] // execute as an entrypoint, but entrypoint will override
