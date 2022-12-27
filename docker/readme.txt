@@ -4,7 +4,7 @@ docker search tomcat
 
 docker pull tomcat // download image from remote
 
-docker build .
+docker build mytestbuild .
 
 docker run -it -p 80800:3000 d2cc7b04fb0a // interactive mode
 
@@ -19,3 +19,5 @@ docker stop
 docker -rmi // delete image
 
 docker prune // delete all images
+
+.dockerignore - file, that defines the Docker build context, you can specify ignore rules and exceptions from these rules for files and folder
