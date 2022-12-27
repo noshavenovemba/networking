@@ -1,5 +1,6 @@
 --- repositories ---
 install apt-transport-https
+grep -rnw '/path/to/somewhere/' -e 'pattern'
 
 --- services ---
 /etc/init.d/apache restart 
