@@ -8,6 +8,8 @@ docker build mytestbuild .
 
 docker run -it -p 80800:3000 d2cc7b04fb0a // interactive mode
 
+docker run -d mytestbuild // run as a daemon
+
 sudo docker run -it --rm --network postgres-network ubuntu/postgres:14-22.04_beta psql -h postgres-container_s3Cr3t -U postgres
 
 docker run --name myapache -d -p 80:80 apache_image:1.0
