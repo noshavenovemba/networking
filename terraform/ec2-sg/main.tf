@@ -7,19 +7,20 @@ terraform {
   }
 }
 
-variable "awsdemo" {
-    default = {
-    ami = "ami-0574da719dca65348"
-    region = "us-east-1"
-    secgroupname = "Demo-Sec-Group"
-
-  }
-}
-
 provider "aws" {
     access_key = "${var.access_key}"
     secret_key = "${var.secret_key}"
     region = "us-east-1"
+}
+
+resource "aws_vpc" "development-vpc" {
+  cidr_block = "${var.vpc_cidr}"
+}
+
+resource "aws_subnet" "test subnet 1" {
+    vpc_id = aws_vpc.development-vpc.id
+    cidr_block = "10.0.10.0/24"
+    availability_zone = "us-east-1a"
 }
 
 resource "aws_security_group" "secgroup" {
