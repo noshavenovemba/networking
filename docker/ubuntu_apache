@@ -4,4 +4,7 @@ RUN apt install –y apache2
 RUN apt install –y apache2-utils 
 RUN apt clean 
 EXPOSE 80
-CMD [“apache2ctl”, “-D”, “FOREGROUND”]
+RUN echo 'Hello, docker' > /var/www/index.html
+
+ENTRYPOINT ["/usr/sbin/apache2"]
+CMD ["-D", "FOREGROUND"]
