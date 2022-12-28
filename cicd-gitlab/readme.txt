@@ -20,7 +20,19 @@ build_image:
 
 submodules - allow you to keep a git repository as a subdirectory of another git repository
 
+git init
+
+git branch mybranch // create branch
+
+git checkout mybranch // switch to branch
+
+git status
+
 git log - find ID of commit
+
+git add testfile.txt
+
+git merge mybrach // merge branches
 
 git reset -  moving the current head of the branch back to the specified commit, thereby changing the commit history
 
