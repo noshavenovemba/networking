@@ -33,9 +33,23 @@ git log - find ID of commit
 git add testfile.txt
 
 git merge mybrach // merge branches
-
+git stash push // hide change
+git stash list // all stash list
+git stash apply 
 git reset -  moving the current head of the branch back to the specified commit, thereby changing the commit history
 
 git revert - creating a new commit that undoes the changes in the specified commit and so does not change the history
 
 gitlab extend // template creation
+project // container for a git repository
+member // user with access
+issue // track work in projects
+merge request // 
+runner // execute job (agent in jenkins)
+
+branching strategy // 
+
+
+
+gitlab group // group of users to manages multiple projects
+
