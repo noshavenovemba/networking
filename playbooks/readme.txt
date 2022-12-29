@@ -14,3 +14,10 @@ debug:
   msg: > this is ip address {{ansible_facts.default_ipv4.address}}
 
 -filter="" // address to exact facts
+
+- name: create user
+  user:
+    name {{item.name}}
+   loop:
+    - name: first
+    - name: second
