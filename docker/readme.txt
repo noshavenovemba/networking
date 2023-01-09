@@ -30,7 +30,7 @@ sudo docker run -it --rm --network postgres-network ubuntu/postgres:14-22.04_bet
 
 docker run --name myapache -d -p 80:80 apache_image:1.0
 
-docker -d $PWD:/usr/share/nginx/html.index // volumne map
+docker --name mynginx --rm -d $PWD:/usr/share/nginx/html.index // volumne map
 
 docker ps -a
 
