@@ -30,7 +30,11 @@ sudo docker run -it --rm --network postgres-network ubuntu/postgres:14-22.04_bet
 
 docker run --name myapache -d -p 80:80 apache_image:1.0
 
+docker -d $PWD:/usr/share/nginx/html.index // volumne map
+
 docker ps -a
+
+docker container inspect 
 
 docker stop 
 
@@ -41,3 +45,5 @@ docker rmi // delete image
 docker prune // delete all images
 
 .dockerignore - file, that defines the Docker build context, you can specify ignore rules and exceptions from these rules for files and folder
+
+docker run -v $PWD:/usr/share/nginx/html -p 8080:80 -d nginx
