@@ -47,3 +47,5 @@ docker prune // delete all images
 .dockerignore - file, that defines the Docker build context, you can specify ignore rules and exceptions from these rules for files and folder
 
 docker run -v $PWD:/usr/share/nginx/html -p 8080:80 -d nginx
+
+docker logs
