@@ -1,0 +1,40 @@
+image:
+  name: rflume/terraform-aws-ansible:latest
+stages:
+  # dev environment stages
+  - validate dev
+  - plan dev
+  - apply dev
+variables: 
+  AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+  AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+# Create files w/ required the secrets
+before_script:
+  - echo “$ID_RSA_TERRAFORM” > /root/.ssh/id_rsa_terraform
+  - chmod 600 /root/.ssh/id_rsa_terraform
+  - echo “$ANSIBLE_VAULT_PASS” > /etc/ansible/vault_password_file
+  - echo “$ANSIBLE_BECOME_PASS” > /etc/ansible/become_pass
+# Apply Terraform on dev environment
+validate:dev:
+  stage: validate dev
+  script:
+    - cd environments/dev
+    - terraform init
+    - terraform validate
+plan:dev:
+  stage: plan dev
+  script:
+    - cd environments/dev
+    - terraform init
+    - terraform plan -out “planfile_dev”
+  artifacts:
+    paths:
+      - environments/dev/planfile_dev
+apply:dev
+  stage: apply dev
+  script:
+    - cd environments/dev
+    - terraform init
+    - terraform apply -input=false “planfile_dev”
+  dependencies:
+    - plan:dev
