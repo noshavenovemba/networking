@@ -1,26 +1,79 @@
 image:
   name: rflume/terraform-aws-ansible:latest
 stages:
-  # dev environment stages
+  # 'global' stages
+  - validate global
+  - plan global
+  - apply global
+  # Dev env stages
   - validate dev
   - plan dev
   - apply dev
-variables: 
+  [... STAGING ...]
+  # Prod env stages
+  - validate prod
+  - plan prod
+  - apply prod
+variables:
   AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
   AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-# Create files w/ required the secrets
+# create files w/ required secrets (so that they’re not stored in
+the docker image!)
 before_script:
   - echo “$ID_RSA_TERRAFORM” > /root/.ssh/id_rsa_terraform
   - chmod 600 /root/.ssh/id_rsa_terraform
   - echo “$ANSIBLE_VAULT_PASS” > /etc/ansible/vault_password_file
   - echo “$ANSIBLE_BECOME_PASS” > /etc/ansible/become_pass
-# Apply Terraform on dev environment
+# Global
+# ------
+validate:global:
+  stage: validate global
+  script:
+    - cd global
+    - terraform init
+    - terraform validate
+  only:
+    changes:
+      - global/**/*   
+      # no modules are included in 'global', so we do not need '- modules/**/*' here
+plan:global:
+  stage: plan global
+  script:
+    - cd global
+    - terraform init
+    - terraform plan -out “planfile_global”
+  artifacts:
+    paths:
+      - global/planfile_global
+  only:
+    changes:
+      - global/**/*
+apply:global:
+  stage: apply global
+  script:
+    - cd global
+    - terraform init
+    - terraform apply -input=false “planfile_global”
+  dependencies:
+    - plan:global
+  when: manual
+  allow_failure: false
+  only:
+    changes:
+      - global/**/*
+
+# DEV ENV
+# -------
 validate:dev:
   stage: validate dev
   script:
     - cd environments/dev
     - terraform init
     - terraform validate
+  only:
+    changes:
+      - environments/dev/**/*
+      - modules/**/*
 plan:dev:
   stage: plan dev
   script:
@@ -30,7 +83,11 @@ plan:dev:
   artifacts:
     paths:
       - environments/dev/planfile_dev
-apply:dev
+  only:
+    changes:
+      - environments/dev/**/*
+      - modules/**/*
+apply:dev:
   stage: apply dev
   script:
     - cd environments/dev
@@ -38,3 +95,53 @@ apply:dev
     - terraform apply -input=false “planfile_dev”
   dependencies:
     - plan:dev
+  allow_failure: false
+  only:
+    refs:
+      - master
+    changes:
+      - environments/dev/**/*
+      - modules/**/*
+[... STAGING ...]
+# PROD ENV
+# ----
+validate:prod:
+  stage: validate prod
+  script:
+    - cd environments/prod
+    - terraform init
+    - terraform validate
+  only:
+    changes:
+      - environments/prod/**/*
+      - modules/**/*
+plan:prod:
+  stage: plan prod
+  script:
+    - cd environments/prod
+    - terraform init
+    - terraform plan -out “planfile_prod”
+    - echo “CHANGES WON’T BE APPLIED UNLESS MERGED INTO ‘MASTER’!
+  artifacts:
+    paths:
+      - environments/prod/planfile_prod
+  only:
+    changes:
+      - environments/prod/**/*
+      - modules/**/*
+apply:prod:
+    stage: apply prod
+  script:
+     - cd environments/prod
+     - terraform init
+      - terraform apply -input=false “planfile_prod”
+  dependencies:
+    - plan:prod
+  when: manual
+  allow_failure: false
+  only:
+    refs:
+      - master
+    changes:
+      - environments/prod/**/*
+      - modules/**/*
