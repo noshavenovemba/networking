@@ -21,3 +21,9 @@ debug:
    loop:
     - name: first
     - name: second
+
+register // to store output of commands
+notify -> handlers
+blocks // block -> rescue(continue) -> always (else)
+changed_when // failuers
+modules: lineinfile, blockinfile, copy, fetch
