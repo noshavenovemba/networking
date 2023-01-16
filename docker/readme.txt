@@ -1,3 +1,5 @@
+docker namespaces // adds a layer of isolation in containers
+
 sudo usermod -aG docker %USERNAME%
 
 docker search tomcat
