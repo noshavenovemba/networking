@@ -1,8 +1,23 @@
+Master:
+API server, Scheduler (on which node pod will be), Controller manager (resource control)
+Deployment (abstraction over pod)
+Pod (abstraction over container)
+ConfigMap (external config of app)
+SecretFile (secret creds)
+Ingress (connection for internal DB)
+ProxyServer -> Ingress Controller (external conn)
+Volumes
+ReplicaSet
+PVC (persistent volumes storage -> mount through PV claim)
+Helm: values.yam, chart.yaml (metadata)
+
 minikube start --driver=virtualbox
 
 kubectl run nginx --image=nginx
 kubectl get pods
 kubectl get namespaces
+kubectl adons enable ingress
+kubens // for namespaces
 
 alias k="kubectl"
 k descride pod nginx
