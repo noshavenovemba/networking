@@ -63,3 +63,13 @@ gitlab group // group of users to manages multiple projects
 tools in jenkins vs dockerimages in gitlab
 package registries //
 
+brew services start gitlab-runner
+
+--- push docker image to gitgitlab registry ---
+1. docker pull nginx
+2. docker tag nginx registry.gitlab.com/noshavenovemba/pushdockerfile/nginx:latest
+3. docker login registry.gitlab.com
+4. commit
+5. docker push registry.gitlab.com/noshavenovemba/pushdockerfile/nginx:latest
+
+--- quick actions --- // merge requests, issues, /title My new title
