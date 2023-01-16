@@ -12,3 +12,7 @@ pg_hba.conf
 - who can authenticate
 - which database to authenticate
 - which IP addresses are allowed
+
+\dt // all tables
+\c
+\l // all databases
