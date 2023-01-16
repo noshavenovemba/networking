@@ -10,6 +10,13 @@ Volumes
 ReplicaSet
 PVC (persistent volumes storage -> mount through PV claim)
 Helm: values.yam, chart.yaml (metadata)
+Stateless (deployment) - stateful (statefulSet)
+ClusterIP Services
+"Target port" is the port on which your container is running. 
+Port : port redirects the traffic to the container from the service. 
+NodePort : is the port that enables the service to access the externally.
+
+Kubectl, kubeproxy (network, load balancing)
 
 minikube start --driver=virtualbox
 
