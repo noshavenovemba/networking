@@ -51,3 +51,7 @@ docker prune // delete all images
 docker run -v $PWD:/usr/share/nginx/html -p 8080:80 -d nginx
 
 docker logs
+
+docker-compose up
+docker-compose up -d
+docker-compose down // delete containers
