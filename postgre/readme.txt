@@ -6,6 +6,18 @@ CASE WHEN something THEN ELSE // if else
 
 DISTINCT vs GROUP BY // DISTINCT gets specific values
 
+UNION // combine SQL queries
+
+AVG SUM // aggregate functions
+
+RANK ROW_NUMBER // window function to assign values
+
+SELECT DATE_FORMAT (...) as date_value
+
+GROUP BY -> HAVING
+
+VIEW (sql query, dynamic change) vs SYNONYM (alias) // 
+
 --- restore superuser ---
 Stop the database server as operating system user postgres : /path/to/postgresql/bin/pg_ctl stop -D /path/to/data/directory.
 Start the server in single user mode: /path/to/postgresql/bin/postgres --single -D /path/to/data/directory postgres. ...
