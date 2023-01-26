@@ -1,3 +1,6 @@
+Kubelet -> to API proxy
+Kube-proxy -> network interface of worker
+
 Master:
 API server, Scheduler (on which node pod will be), Controller manager (resource control)
 Deployment (abstraction over pod)
