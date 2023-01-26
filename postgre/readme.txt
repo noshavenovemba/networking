@@ -32,3 +32,19 @@ pg_hba.conf
 \dt // all tables
 \c
 \l // all databases
+
+CREATE DATABASE test_erp;
+\c test_erp
+CREATE TABLE clients (id SERIAL PRIMARY KEY, first_name VARCHAR, last_name VARCHAR, role VARCHAR);
+
+psql -h 44.204.52.138 -p 5432 -d test_erp -U vadim
+
+nano /etc/postgresql/14/main/pg_hba.conf
+
+sudo -u postgres psql
+
+CREATE user1 WITH PASSWORD 'user1' WITH CREATEROLE SUPERUSER
+
+pg_dump -U vadim -d test_erp > clients.sql
+
+\i /tmp/clients.sql
