@@ -21,6 +21,8 @@ ReplicaSet // manage replicas on pod
 daemonSet // ensures that all (or some) Nodes run a copy of a Pod
 PersistentVolume
 PVC (persistent volumes storage -> mount through PV claim)
+StorageClass // dynamically creates PVC (provisioner)
+no replication of statefull state 
 
 --------- minikube service <name> ---------
 minikube start --driver=virtualbox --extra-config=kubeadm.ignore-preflight-errors=NumCPU --force --cpus=1
