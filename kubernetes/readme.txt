@@ -32,7 +32,7 @@ minikube dashboard //open web interface
 --------- alias k="kubectl" ---------
 k get componentstatuses // summary
 k cluster-info
-k get nodes / pods / namespaces / services
+k get nodes / pods --watch/ namespaces / services 
 k run <name> --image=<name>
 k adons enable ingress
 k describe pod <name>
@@ -119,3 +119,9 @@ kind: ConfigMap
 data:
   database: mongodb
   database_uri: mongodb://localhost:27017
+---
+kind: Secret
+type: Opaque
+data:
+  username:
+  password:
