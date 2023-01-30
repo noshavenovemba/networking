@@ -73,3 +73,5 @@ brew services start gitlab-runner
 5. docker push registry.gitlab.com/noshavenovemba/pushdockerfile/nginx:latest
 
 --- quick actions --- // merge requests, issues, /title My new title
+
+linting stage // analyze of a code
