@@ -26,6 +26,8 @@ git add .
 git commit
 git remote add origin https://...
 git push --set-upstream origin main
+git rebase // moving commits to a new base
+git cherry-pick // picking commits from one branch to another
 
 git clone
 
