@@ -3,6 +3,7 @@
 hadolint Dockerfile // scan dockerfile for syntax
 DOCKER_CONTENT_TRUST=1 // to verify the integrity and authenticity of an image
 HEALTHCHECK CMD curl --fail http://localhost:8000 || exit 1 
+label, workdir // don't add a layer to dockerfile
 
 docker build <name> .
 docker search <name>
@@ -18,6 +19,7 @@ docker --name <name> --rm -d $PWD:/usr/share/nginx/html.index // volumne map
 docker tag <name> mytag
 docker container inspect 
 docker logs
+docker stats // runtime cpu, memory network IO
 docker exec -it <id> /bin/bash // echo "another string" >> /var/www/index.html
 docker ps -a
 docker stop 
