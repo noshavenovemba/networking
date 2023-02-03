@@ -22,6 +22,7 @@ daemonSet // ensures that all (or some) Nodes run a copy of a Pod
 PersistentVolume
 PVC (persistent volumes storage -> mount through PV claim)
 StorageClass // dynamically creates PVC (provisioner)
+VolumeClaimTemplates // it's a VPC but in statefulset
 no replication of statefull state 
 
 --------- minikube service <name> ---------
@@ -32,6 +33,8 @@ minikube dashboard //open web interface
 --------- alias k="kubectl" ---------
 k get componentstatuses // summary
 k cluster-info
+k get po -n kube-system // access etcd
+k describe po <etcd-podname> -n kube-system
 k get nodes / pods --watch/ namespaces / services 
 k run <name> --image=<name>
 k adons enable ingress
@@ -39,6 +42,7 @@ k describe pod <name>
 k get post -o wide //find IP of container
 k delete pod <name>
 k create deployment <name> --image=<name>
+k edit deployment <name>
 k port-forward <podname> 8080
 k scale deployment <name> —replicas=4 // 4 replicas
 k scale deployment <name> —min=4 —max=6 —cpu-percent=80
@@ -49,10 +53,49 @@ k expose deployment <name> —type=LoadBalancer —port=3000
 k get services // or get svc 
 k apply -f deployment.yml --namespace <name>
 k rollout history <deployment/depname>
-k set image <deployment/depname> <containername>=<imagename> —record // update image
+k set image <deployment/depname> <containername>=<imagename> —record // upgrade image
+k rollout history deployment <name>
 k rollout undo <deployment/depname> —to-revision=4
 k rollout restart <deployment/depname>
 k rollout status  <deployment/depname> 
+k describe <etcd-podname> // show etcd
+
+--------- masternode and workernode upgrade ---------
+1. apt-get install kubeadm=1.23.3, apt-mark hold kubeadm & kubeadm version
+2. kubeadm upgrade plan & kubeadm upgrade apply v1.23.3
+3. kubectl drain <nodename> --ignore-daemonsets
+4. apt-mark unhold kubeadm, update, hold kubectl
+5. systemctl restart kubelet & kubectl uncordon <nodename>
+
+1. apt-get install kubeadm=1.23.3, apt-mark hold kubeadm
+2. kubeadm upgrade node
+3. kubectl drain <nodename> --ignore-daemonsets
+4. apt-mark unhold kubeadm, update, hold kubectl
+5. systemctl restart kubelet & kubectl uncordon <nodename>
+
+1. ssh master node
+2. ( sudo ETCDCTL_API=3 etcdctl endpoint status --endpoints=ht
+tps://172.16.16.129:2379 --cacert=/etc/kubernetes/pki/etcd/
+ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/
+kubernetes/pki/etcd/server.key --write-out=table )
+3. take snapshot 
+  sudo ETCDCTL_API=3 etcdctl --endpoints $ENDPOINT snapshot save
+snapshotdb      
+        AND
+  sudo ETCDCTL_API=3 etcdctl snapshot save snapshotdb
+--endpoints=https://172.16.16.129:2379
+--cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/
+kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/
+server.key
+        OR to restore
+  sudo ETCDCTL_API=3 etcdctl --endpoints 172.16.16.129:2379
+snapshot restore snapshotdb
+4. verify snapshot 
+  sudo ETCDCTL_API=3 etcdctl snapshot status snapshotdb --endpo
+ints=https://172.16.16.129:2379 --cacert=/etc/kubernetes/pki/
+etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/
+etc/kubernetes/pki/etcd/server.key --write-out=table
+
 
 --------- helm: template.yaml, values.yaml (default values), chart.yaml (metadata) ---------
 helm create MyChart
