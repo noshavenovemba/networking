@@ -1,5 +1,5 @@
 Node: Kubelet (API between container and node), kube-proxy (network interface rules)
-MasterNode: API server, Scheduler (start pode on a node), Controller manager (resource control), etcd (cluster brain)
+MasterNode: API server, Scheduler (start pode on a node), Controller manager (resource control), etcd (cluster brain, key-value information)
 
 Pod (abstraction over container)
 Deployment (abstraction over pod, stateless)
@@ -24,6 +24,11 @@ PVC (persistent volumes storage -> mount through PV claim)
 StorageClass // dynamically creates PVC (provisioner)
 VolumeClaimTemplates // it's a VPC but in statefulset
 no replication of statefull state 
+labels (find objects), annotations (metadata which doesn't care)
+Nodeselector (assign a pod directly to worker node), affinity (assign to the right node, more control)
+taint node (no pods to node)
+initcontainers // custom code which is not present in image
+Cloud->Cluster->Container-Code (security layers)
 
 --------- minikube service <name> ---------
 minikube start --driver=virtualbox --extra-config=kubeadm.ignore-preflight-errors=NumCPU --force --cpus=1
@@ -40,6 +45,7 @@ k run <name> --image=<name>
 k adons enable ingress
 k describe pod <name>
 k get post -o wide //find IP of container
+k top
 k delete pod <name>
 k create deployment <name> --image=<name>
 k edit deployment <name>
@@ -59,6 +65,11 @@ k rollout undo <deployment/depname> —to-revision=4
 k rollout restart <deployment/depname>
 k rollout status  <deployment/depname> 
 k describe <etcd-podname> // show etcd
+k get serviceaccounts
+k config current-context
+k config use-context akscluster
+
+k run nginx --image=nginx --dry-run=client -o yaml
 
 --------- masternode and workernode upgrade ---------
 1. apt-get install kubeadm=1.23.3, apt-mark hold kubeadm & kubeadm version
