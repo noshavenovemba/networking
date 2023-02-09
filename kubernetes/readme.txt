@@ -1,5 +1,8 @@
 Node: Kubelet (API between container and node), kube-proxy (network interface rules)
 MasterNode: API server, Scheduler (start pode on a node), Controller manager (resource control), etcd (cluster brain, key-value information)
+liveness probe // check if the container is run and alive
+readiness probe // check if the application is ready to send traffic
+startup probe // check if when application is started
 
 Pod (abstraction over container)
 Deployment (abstraction over pod, stateless)
