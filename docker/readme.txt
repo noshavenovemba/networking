@@ -2,7 +2,8 @@
 .dockerignore - file, that defines the Docker build context, you can specify ignore rules and exceptions from these rules for files and folder
 hadolint Dockerfile // scan dockerfile for syntax
 DOCKER_CONTENT_TRUST=1 // to verify the integrity and authenticity of an image
-HEALTHCHECK CMD curl --fail http://localhost:8000 || exit 1 
+HEALTHCHECK CMD curl --fail http://localhost:8000 || exit 1 // check that container is working
+HEALTHCHECK // specify the signal that will be used to stop the container
 label, workdir // don't add a layer to dockerfile
 
 docker build <name> .
