@@ -60,6 +60,8 @@ k expose deployment <name> —port 8080 —target-port=80 // create service
 k expose deployment <name> —type=NodePort —port=3000 // balance ports
 k expose deployment <name> —type=LoadBalancer —port=3000 
 k get services // or get svc 
+k get events // 
+k logs -f logger // live stream of logs
 k apply -f deployment.yml --namespace <name>
 k rollout history <deployment/depname>
 k set image <deployment/depname> <containername>=<imagename> —record // upgrade image
