@@ -32,3 +32,7 @@ docker namespaces // adds a layer of isolation in containers
 docker-compose up
 docker-compose up -d
 docker-compose down // delete containers
+
+--- examples ---
+docker run -d --name netforce_camelgw -e -p 3306:3306 -e MYSQL_ROOT_PASSWORD=abhNF22db ubuntu/mysql
+docker run -d --name netfors_camelgw --privileged --volumes-from ba0823b789c8 --net=host -e MYSQL_ROOT_PASSWORD=abhNF22db ubuntu_camelgw:latest
